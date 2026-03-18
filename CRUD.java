@@ -11,29 +11,22 @@ public class CRUD {
     public static void main(String[] args) throws Exception {
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-
         server.createContext("/users", exchange -> {
             String method = exchange.getRequestMethod();
             String response = "";
-
             if ("POST".equals(method)) {
-                // CREATE
                 String body = new String(exchange.getRequestBody().readAllBytes());
                 data.put(idCounter, body);
                 response = "User created with ID: " + idCounter;
                 idCounter++;
             }
-
             else if ("GET".equals(method)) {
-                // READ
                 response = data.toString();
             }
 
             else if ("PUT".equals(method)) {
-                // UPDATE
                 String query = exchange.getRequestURI().getQuery(); // id=1
                 int id = Integer.parseInt(query.split("=")[1]);
-
                 if (data.containsKey(id)) {
                     String body = new String(exchange.getRequestBody().readAllBytes());
                     data.put(id, body);
@@ -44,7 +37,6 @@ public class CRUD {
             }
 
             else if ("DELETE".equals(method)) {
-                // DELETE
                 String query = exchange.getRequestURI().getQuery();
                 int id = Integer.parseInt(query.split("=")[1]);
 
