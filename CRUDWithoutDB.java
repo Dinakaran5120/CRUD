@@ -3,7 +3,7 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.util.*;
 
-public class CRUDWithoutDB {
+public class CRUD {
 
     static Map<Integer, String> data = new HashMap<>();
     static int idCounter = 1;
